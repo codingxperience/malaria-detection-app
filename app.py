@@ -1,12 +1,16 @@
 import streamlit as st
 from PIL import Image
-import subprocess
+from ultralytics import YOLO
 import os
 
 import utils
 
+# def detect_objects(image_path, model_path, output_dir):
+#     subprocess.run(['yolo', 'task=detect', 'mode=predict', f'model={model_path}', 'conf=0.25', f'source={image_path}'])
+
 def detect_objects(image_path, model_path, output_dir):
-    subprocess.run(['yolo', 'task=detect', 'mode=predict', f'model={model_path}', 'conf=0.25', f'source={image_path}'])
+    model = YOLO(model_path)
+    results = model.predict(source=image_path, conf=0.25)
 
 def main():
     st.title('Malaria Screener')
