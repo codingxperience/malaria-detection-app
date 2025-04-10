@@ -65,13 +65,15 @@ import time
 import io
 import matplotlib.pyplot as plt
 import os
+import sys
+from pathlib import Path
 from ultralytics import YOLO  
 from utils import check_folders, get_latest_detected_image  
 
 st.set_page_config(page_title="Malaria Screener", page_icon="🦠", layout="wide")
 
 # ✅ Fix asyncio error for Windows
-if not hasattr(asyncio, 'WindowsSelectorEventLoopPolicy'):
+if sys.platform.startswith('win'):
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 # ✅ Ensure required folders exist
